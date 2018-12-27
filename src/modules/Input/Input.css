@@ -1,0 +1,15 @@
+.input {
+  /* Box Model */
+  height: 30px;
+  width: 100%;
+
+  /* Visual */
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  background: transparent;
+
+  /* Typography */
+  font-size: 1em;
+  color: #333;
+}

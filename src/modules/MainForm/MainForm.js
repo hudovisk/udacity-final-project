@@ -1,14 +1,23 @@
 import React from "react";
 
-import Input from "../Input";
+import AutoCompleteInput from "./AutoCompleteInput";
 
 import "./MainForm.css";
 
 const MainForm = () => {
+  const handlePlaceChanged = (place) => {
+    console.log(place);
+  }
+
   return (
-    <div className="main-form">
-      <Input className="main-form__place-input" placeholder="" />
-    </div>
+    <form className="main-form" onSubmit={e => e.preventDefault()}>
+      <AutoCompleteInput
+        className="main-form__place-input"
+        placeholder="search places with autocomplete!"
+        onPlaceChanged={handlePlaceChanged}
+      />
+      <button className="main-form__submit fas fa-search" type="submit" />
+    </form>
   );
 };
 

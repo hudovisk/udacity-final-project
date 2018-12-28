@@ -2,22 +2,43 @@
   /* Position */
   position: absolute;
   top: 80px;
-  left: 50px;
+  left: 10px;
   z-index: 10;
 
   /* Box Model */
-  min-width: 300px;
-  min-height: 300px;
-  padding: 30px;
+  min-width: calc(100vw - 20px);
+  padding: 10px;
+  display: flex;
 
   /* Visual */
   background-color: #fff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  border-bottom: 8px solid indianred;
+  border-radius: 4px;
 }
 
 .main-form__place-input {
+  /* Box Model */
+  width: 100%;
+  
   /* Typography */
   font-size: 1.2em;
+}
+
+.main-form__submit {
+  /* Box Model */
+  margin-left: 10px;
+
+  /* Visual */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  /* Typography */
+  font-size: 1.5em;
+  color: #666;
+}
+
+.main-form__submit:focus, .main-form__submit:hover {
+  /* Typography */
+  color: cornflowerblue;
 }

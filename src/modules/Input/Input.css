@@ -13,3 +13,8 @@
   font-size: 1em;
   color: #333;
 }
+
+.input:focus {
+  /* Visual */
+  border-color: cornflowerblue;
+}

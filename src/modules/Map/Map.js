@@ -2,4 +2,8 @@ import React from "react";
 
 import "./Map.css";
 
-export default () => <div className="map" />;
+const Maps = React.forwardRef((_, ref) => {
+  return <div ref={ref} className="map" />;
+});
+
+export default Maps;

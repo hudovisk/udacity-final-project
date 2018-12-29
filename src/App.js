@@ -1,12 +1,20 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
+import { GoogleContextProvider } from "./hooks/useGoogle";
+import { init } from "./lib/google-maps";
 
-class App extends Component {
-  render() {
-    return <Home />;
-  }
+export default function App() {
+  const [google, setGoogle] = useState();
+
+  useEffect(() => {
+    init().then(setGoogle);
+  }, []);
+
+  return (
+    <GoogleContextProvider value={google}>
+      {!google ? "loading" : <Home />}
+    </GoogleContextProvider>
+  );
 }
-
-export default App;

@@ -1,36 +1,40 @@
 import React, { useRef, useEffect } from "react";
 import Input from "../Input";
 import useMap from "../../hooks/useMap";
-import { init } from "../../lib/google-maps";
+import useGoogle from "../../hooks/useGoogle";
 
-const options = {
+const defaultOptions = {
   types: ["establishment"]
 };
 
-const AutoCompleteInput = ({ onPlaceChanged, className, ...rest }) => {
-  const autocomplete = useRef();
+const AutoCompleteInput = ({
+  onPlaceChanged,
+  className,
+  options = defaultOptions,
+  ...rest
+}) => {
+  const google = useGoogle();
   const inputRef = useRef();
+  const autocomplete = useRef();
   const map = useMap();
 
   useEffect(() => {
-    init().then(google => {
-      autocomplete.current = new google.maps.places.Autocomplete(
-        inputRef.current,
-        options
-      );
-      autocomplete.current.bindTo("bounds", map);
-      autocomplete.current.addListener("place_changed", handlePlaceChanged);
-    });
-
-    return () => {
-      if (autocomplete.current) {
-        autocomplete.current.removeListener(
-          "place_changed",
-          handlePlaceChanged
-        );
-      }
-    };
+    autocomplete.current = new google.maps.places.Autocomplete(
+      inputRef.current,
+      options
+    );
   }, []);
+
+  useEffect(() => autocomplete.current.bindTo("bounds", map), [map]);
+
+  useEffect(() => {
+    const autocompleteLsr = autocomplete.current.addListener(
+      "place_changed",
+      handlePlaceChanged
+    );
+
+    return () => google.maps.event.removeListener(autocompleteLsr);
+  });
 
   const handlePlaceChanged = () => {
     const place = autocomplete.current.getPlace();

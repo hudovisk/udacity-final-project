@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 
-import { init } from "../lib/google-maps";
+import useGoogle from "./useGoogle";
 
 export default function usePlaces(map) {
-  const [placesService, setPlacesService] = useState(null);
-
-  console.log(map)
-
-  useEffect(
-    () => {
-      init().then(google => {
-        const places = new google.maps.places.PlacesService(map)
-        setPlacesService(places)
-        console.log(places)
-      });
-    },
-    [map]
+  const google = useGoogle();
+  const [placesService, setPlacesService] = useState(
+    new google.maps.places.PlacesService(map)
   );
+
+  useEffect(() => setPlacesService(new google.maps.places.PlacesService(map)), [
+    map
+  ]);
 
   return placesService;
 }

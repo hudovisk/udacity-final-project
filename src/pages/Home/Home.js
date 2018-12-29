@@ -5,27 +5,50 @@ import Map from "../../modules/Map";
 
 import { MapsContextProvider } from "../../hooks/useMap";
 
-import { init } from "../../lib/google-maps";
+import useGoogle from "../../hooks/useGoogle";
+import Marker from "../../modules/Marker";
 
 const options = {
   center: { lat: -25.479, lng: -49.228 },
   zoom: 15
 };
 
-export default () => {
+export default function Home() {
+  const google = useGoogle();
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
+  const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    init().then(google => setMap(new google.maps.Map(mapRef.current, options)));
+    setMap(new google.maps.Map(mapRef.current, options));
   }, []);
 
+  const handlePlacesResult = places => {
+    // If we only returned one result center on it
+    if (places.length === 1) {
+      if (places[0].geometry.viewport) {
+        map.fitBounds(places[0].geometry.viewport);
+      } else {
+        map.setCenter(places[0].geometry.location);
+        map.setZoom(17);
+      }
+    }
+
+    console.log("setMarkers", places);
+    setMarkers(places.slice());
+  };
+
   return (
-    <div className="home">
-      <MapsContextProvider value={map}>
-        {map && <MainForm />}
+    <MapsContextProvider value={map}>
+      <div className="home">
+        {map && <MainForm onPlacesResult={handlePlacesResult} />}
+
         <Map ref={mapRef} />
-      </MapsContextProvider>
-    </div>
+
+        {map && markers.map(place => (
+          <Marker place={place} location={place.geometry.location} key={place.reference} />
+        ))}
+      </div>
+    </MapsContextProvider>
   );
 };

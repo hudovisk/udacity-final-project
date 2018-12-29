@@ -42,3 +42,11 @@
   /* Typography */
   color: cornflowerblue;
 }
+
+
+@media only screen and (min-width: 768px) {
+  .main-form {
+    width: 450px;
+    min-width: 0px;
+  }
+}

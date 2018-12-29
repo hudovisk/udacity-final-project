@@ -1,0 +1,12 @@
+.marker-details {
+
+}
+
+.marker-details__cover {
+  /* Box Model */
+  width: 250px;
+  height: auto;
+  
+  /* Visual */
+  object-fit: cover;
+}

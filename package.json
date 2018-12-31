@@ -2,6 +2,7 @@
   "name": "udacity-final-project",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://hudovisk.github.io/udacity-final-project",
   "dependencies": {
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",

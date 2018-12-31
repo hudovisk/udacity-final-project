@@ -1,0 +1,34 @@
+.rating {
+  /* Position */
+  position: relative;
+
+  /* Box Model */
+  display: inline-block;
+  width: 5rem;
+  height: 1rem;
+
+  /* Typography */
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.rating div {
+  /* Position */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* Box Model */
+  width: 100%;
+}
+
+.rating--colored {
+  /* Position */
+  z-index: 1;
+  
+  /* Visual */
+  overflow: hidden;
+
+  /* Typography */
+  color: #e7711b;
+}

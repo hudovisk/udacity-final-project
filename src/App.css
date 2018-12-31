@@ -1,32 +1,31 @@
-.App {
-  text-align: center;
+/* The location pointed to by the popup tip. */
+.popup-tip-anchor {
+  height: 0;
+  position: absolute;
+  /* The max width of the info window. */
+  width: 150px;
+}
+/* The bubble is anchored above the tip. */
+.popup-bubble-anchor {
+  position: absolute;
+  width: 100%;
+  bottom: /* TIP_HEIGHT= */ 8px;
+  left: 0;
+}
+/* Draw the tip. */
+.popup-bubble-anchor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: /* TIP_HEIGHT= */ 8px solid white;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
